@@ -2,6 +2,7 @@ package com.ycy.service.impl;
 
 import com.ycy.center.dao.entity.User2;
 import com.ycy.center.dao.mapper.User2Mapper;
+import com.ycy.common.MyExcetion;
 import com.ycy.service.User2Service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,26 @@ public class User2ServiceImpl implements User2Service {
         user2Mapper.insert(user);
         log.error("addRequiredException");
         throw new RuntimeException();
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void addRequiresNew(User2 user) {
+        user2Mapper.insert(user);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void addRequiresNewException(User2 user) {
+        user2Mapper.insert(user);
+        log.error("addRequiredException");
+        throw new RuntimeException();
+    }
+
+    @Override
+    public void addRequiresNewMyException(User2 user) {
+        user2Mapper.insert(user);
+        log.error("addRequiredException");
+        throw new MyExcetion();
     }
 }
