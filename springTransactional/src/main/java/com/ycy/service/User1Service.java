@@ -14,4 +14,7 @@ public interface User1Service {
      void addRequiresNew(User1 user);
 
      void addRequiresUser1AndRequiresNewUser2(User1 user1, User2 user2);
+
+     void addRequiresUser1AndRequiresUser2(User1 user,User2 user2);
+
 }

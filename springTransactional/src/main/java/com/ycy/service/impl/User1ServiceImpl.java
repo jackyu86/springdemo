@@ -51,9 +51,27 @@ public class User1ServiceImpl implements User1Service {
 
         user1Mapper.insert(user1);
         // new transactional throws runtime exception for rollback
-        user2Service.addRequiresNewException(user2);
+        try {
+            user2Service.addRequiresNewException(user2);
+        }catch (Exception e){
+            //抛出不回滚异常 外层事务不回滚
+            throw new MyExcetion();
+        }
         // new transational throws myexception for no rollback
         //user2Service.addRequiresNewMyException(user2);
 
+        //user2Service.addRequiresNew(user2);
+        //throw new RuntimeException("addRequiresUser1AndRequiresNewUser2");
+
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void addRequiresUser1AndRequiresUser2(User1 user, User2 user2) {
+        user1Mapper.insert(user);
+
+        user2Service.addRequired(user2);
+        //user2Service.addRequiredException(user2);
+         throw new RuntimeException("throws  user2 insert after  ");
     }
 }

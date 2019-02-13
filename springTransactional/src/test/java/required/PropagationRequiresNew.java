@@ -51,8 +51,11 @@ public class PropagationRequiresNew extends BaseJunit4 {
      */
     @Test
     public void  notransaction_requiresNewInRequires(){
-
-
+        User1 user1=new User1();
+        user1.setName("张三_addRequiresUser1AndRequiresNewUser2");
+        User2 user2=new User2();
+        user2.setName("李四_addRequiresUser1AndRequiresNewUser2");
+        user1Service.addRequiresUser1AndRequiresNewUser2(user1,user2);
     }
 
 }
