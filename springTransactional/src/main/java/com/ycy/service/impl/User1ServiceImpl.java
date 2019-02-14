@@ -74,4 +74,29 @@ public class User1ServiceImpl implements User1Service {
         //user2Service.addRequiredException(user2);
          throw new RuntimeException("throws  user2 insert after  ");
     }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public void addSupports(User1 user1) {
+        user1Mapper.insert(user1);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public void addSupportsException(User1 user1) {
+        user1Mapper.insert(user1);
+        throw new RuntimeException();
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void addRequiresUser1AndSupportsUser2(User1 user1, User2 user2) {
+        user1Mapper.insert(user1);
+
+        user2Service.addSupports(user2);
+        //user2Service.addRequiredException(user2);
+        throw new RuntimeException("throws  user2 insert after  ");
+    }
+
+
 }

@@ -51,9 +51,25 @@ public class User2ServiceImpl implements User2Service {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void addRequiresNewMyException(User2 user) {
         user2Mapper.insert(user);
         log.error("addRequiredException");
         throw new MyExcetion();
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public void addSupports(User2 user2) {
+        user2Mapper.insert(user2);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public void addSupportsException(User2 user2) {
+        user2Mapper.insert(user2);
+        log.error("addSupportsException--supports");
+        throw new RuntimeException("addSupportsException");
+
     }
 }

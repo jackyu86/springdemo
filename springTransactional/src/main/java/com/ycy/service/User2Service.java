@@ -15,4 +15,8 @@ public interface User2Service {
      void addRequiresNewException(User2 user);
 
      void addRequiresNewMyException(User2 user);
+
+     void addSupports(User2 user2);
+
+     void addSupportsException(User2 user2);
 }
