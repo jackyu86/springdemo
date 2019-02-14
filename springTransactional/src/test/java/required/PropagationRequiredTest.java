@@ -123,7 +123,7 @@ public class PropagationRequiredTest extends BaseJunit4 {
         User2 user2=new User2();
         user2.setName("李四_addRequiresUser1AndRequiresUser2");
         user1Service.addRequiresUser1AndRequiresUser2(user1,user2);
-
     }
+
 
 }

@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @Data
 @Slf4j
-public class PropagationRequiresNew extends BaseJunit4 {
+public class PropagationRequiresNewTest extends BaseJunit4 {
 
     @Autowired
     private User1Service user1Service;
