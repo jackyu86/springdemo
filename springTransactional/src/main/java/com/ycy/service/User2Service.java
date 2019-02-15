@@ -19,4 +19,8 @@ public interface User2Service {
      void addSupports(User2 user2);
 
      void addSupportsException(User2 user2);
+
+     void addNested(User2 user2);
+
+     void addNestedException(User2 user2);
 }

@@ -47,7 +47,6 @@ public class PropagationRequiresSupportTest extends BaseJunit4 {
         user2.setName("李四transaction_supports_supports_exception");
         user2Service.addSupportsException(user2);
 
-        throw new RuntimeException("transaction_supports_supports_exception");
     }
 
 

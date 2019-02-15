@@ -22,4 +22,10 @@ public interface User1Service {
      void addSupportsException(User1 user1);
 
      void addRequiresUser1AndSupportsUser2(User1 user1, User2 user2);
+
+     void addNested(User1 user1);
+
+     void addRequiredUser1AndNestedUser2(User1 user1,User2 user2);
+
+
 }

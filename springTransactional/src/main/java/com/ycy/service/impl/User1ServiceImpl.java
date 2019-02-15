@@ -6,6 +6,7 @@ import com.ycy.center.dao.mapper.User1Mapper;
 import com.ycy.common.MyExcetion;
 import com.ycy.service.User1Service;
 import com.ycy.service.User2Service;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Created by Administrator on 2019/2/2.
  */
+@Slf4j
 @Service
 public class User1ServiceImpl implements User1Service {
 
@@ -54,8 +56,9 @@ public class User1ServiceImpl implements User1Service {
         try {
             user2Service.addRequiresNewException(user2);
         }catch (Exception e){
+            log.error("addRequiresUser1AndRequiresNewUser2");
             //抛出不回滚异常 外层事务不回滚
-            throw new MyExcetion();
+            //throw new MyExcetion();
         }
         // new transational throws myexception for no rollback
         //user2Service.addRequiresNewMyException(user2);
@@ -96,6 +99,21 @@ public class User1ServiceImpl implements User1Service {
         user2Service.addSupports(user2);
         //user2Service.addRequiredException(user2);
         throw new RuntimeException("throws  user2 insert after  ");
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.NESTED)
+    public void addNested(User1 user1) {
+        user1Mapper.insert(user1);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void addRequiredUser1AndNestedUser2(User1 user1, User2 user2) {
+        user1Mapper.insert(user1);
+
+        user2Service.addNestedException(user2);
+
     }
 
 
