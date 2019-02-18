@@ -108,11 +108,19 @@ public class User1ServiceImpl implements User1Service {
     }
 
     @Override
+    /**
+     *
+     */
     @Transactional(propagation = Propagation.REQUIRED)
     public void addRequiredUser1AndNestedUser2(User1 user1, User2 user2) {
         user1Mapper.insert(user1);
+        try {
+            user2Service.addNestedException(user2);
+        }catch (Exception e){
+            log.error("addNestedException exec addNested");
+            user2Service.addNested(user2);
+        }
 
-        user2Service.addNestedException(user2);
 
     }
 

@@ -95,7 +95,7 @@ public class PropagationRequiresNestedTest extends BaseJunit4 {
      * 无效
      */
     @Test
-    @Transactional
+    @Transactional(propagation = Propagation.NESTED)
     @Deprecated
     public void transaction_nested_nested_exception_try_catch(){
         User1 user1=new User1();
@@ -109,8 +109,9 @@ public class PropagationRequiresNestedTest extends BaseJunit4 {
             user2Service.addNestedException(user2);
             //user2Service.addRequiredException(user2);
         }catch (Exception e){
+            user2.setName("李四_transaction_nested_nested_exception_try_catch222");
             user2Service.addNested(user2);
-            log.error("transaction_nested_nested_exception_try_catch");
+            log.error("transaction_nested_nested_exception_try_catch2222");
         }
 
     }
